@@ -22,8 +22,8 @@ docker:
   stage: test
   image: jrottenberg/versiongen
   script:
-     - src/run.py
-     - cat version.json
+     - src/run.py -o src/version
+     - cat src/version.json
   artifacts:
     paths:
-    - version.json
+    - src/version.json
