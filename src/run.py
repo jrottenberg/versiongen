@@ -4,10 +4,21 @@
 import os
 import json
 from datetime import datetime, timezone
+
+import argparse
+
 now = datetime.now(timezone.utc).isoformat()
 
+
+parser = argparse.ArgumentParser(description='Will generate a version file')
+
+parser.add_argument('-o', '--output', default='version.json',
+                    help='where to store the file')
+
+args = parser.parse_args()
+
 version = {}
-filename = 'version.json'
+filename = args.output
 
 
 # {
