@@ -1,0 +1,20 @@
+image: python:3
+
+stages:
+- lint
+- build
+- test
+
+
+
+flake8:
+   stage: lint
+   script:
+     - pip install flake8
+     - flake8 src
+
+test:
+  stage: test
+  script:
+     - src/run.py
+     - cat version.json
