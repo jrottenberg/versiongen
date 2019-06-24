@@ -12,8 +12,18 @@ flake8:
      - pip install flake8
      - flake8 src
 
-test:
+local:
   stage: test
   script:
      - src/run.py
      - cat version.json
+
+docker:
+  stage: test
+  image: jrottenberg/versiongen
+  script:
+     - src/run.py
+     - cat version.json
+  artifacts:
+    paths:
+    - version.json

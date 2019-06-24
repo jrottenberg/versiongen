@@ -45,3 +45,4 @@ https://docs.travis-ci.com/user/environment-variables/#default-environment-varia
 
 https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops&tabs=yaml
 
+https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables
