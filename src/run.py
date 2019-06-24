@@ -6,10 +6,6 @@ import json
 from datetime import datetime, timezone
 now = datetime.now(timezone.utc).isoformat()
 
-for i, j in os.environ.items():
-    print("{}={}".format(i, j))
-
-
 version = {}
 filename = 'version.json'
 

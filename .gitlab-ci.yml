@@ -6,7 +6,6 @@ stages:
 - test
 
 
-
 flake8:
    stage: lint
    script:

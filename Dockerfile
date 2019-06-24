@@ -1,4 +1,7 @@
 FROM python:3
 
 
-CMD ["src/run.py"]
+CMD ["/opt/src/run.py"]
+
+
+ADD src /opt/src

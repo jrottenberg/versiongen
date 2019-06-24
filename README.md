@@ -2,6 +2,11 @@
 Generate a version file for CI
 
 
+## Goal
+
+Each ci system presents environment variables to the project being built. Every project could use a simple version file generated at build time and read at runtime to give information about the build artifact.
+
+
 
 ```
 export CI_COMMIT_SHA=01234567890
@@ -14,6 +19,8 @@ export CI_REPOSITORY_URL=git@git.local:local
 
 -->
 
+Generates version.json with :
+
 ```
 {
     "buildNumber": "0",
@@ -25,3 +32,16 @@ export CI_REPOSITORY_URL=git@git.local:local
     "version": "0"
 }
 ```
+
+
+
+## The CIs
+
+https://docs.gitlab.com/ee/ci/variables/predefined_variables.html
+
+https://wiki.jenkins.io/display/JENKINS/Building+a+software+project#Buildingasoftwareproject-belowJenkinsSetEnvironmentVariables
+
+https://docs.travis-ci.com/user/environment-variables/#default-environment-variables
+
+https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops&tabs=yaml
+
