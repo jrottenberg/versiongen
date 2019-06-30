@@ -13,7 +13,6 @@ flake8:
      - flake8 src
 
 
-
 pytest:
   stage: test
   script:

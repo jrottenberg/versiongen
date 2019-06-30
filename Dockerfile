@@ -1,7 +1,7 @@
 FROM python:3
 
 
-CMD ["/opt/src/run.py"]
+CMD ["/opt/versiongen/generate.py.py"]
 
 
-ADD src /opt/src
+ADD versiongen /opt/versiongen
