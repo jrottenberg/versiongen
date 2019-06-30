@@ -34,7 +34,6 @@ image-master:
   variables:
     IMAGE: ${IMAGE_REPOSITORY}:${CI_PIPELINE_IID}_master
 
-
 image-develop:
   extends: .docker
   except:
@@ -42,12 +41,10 @@ image-develop:
   variables:
     IMAGE: ${IMAGE_REPOSITORY}:${CI_PIPELINE_IID}_develop
 
-
-
 local:
   stage: test
   script:
-     - src/run.py -o src/version
+     - src/run.py -o src/version.json
      - cat src/version.json
 
 validate:
@@ -56,7 +53,7 @@ validate:
   only:
     - master
   script:
-     - src/run.py -o src/version
+     - src/run.py -o src/version.json
      - cat src/version.json
   artifacts:
     paths:
