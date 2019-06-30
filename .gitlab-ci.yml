@@ -12,12 +12,14 @@ flake8:
      - pip install flake8
      - flake8 src
 
-
 pytest:
   stage: test
   script:
      - pip install pytest-cov
-     - pytest --cov versiongen
+     - pytest
+  artifacts:
+    paths:
+    - htmlcov
 
 local-run:
   stage: test
@@ -54,3 +56,14 @@ image-develop:
     - master
   variables:
     IMAGE: ${IMAGE_REPOSITORY}:${CI_PIPELINE_IID}_develop
+
+pages:
+  stage: build
+  script:
+    - mkdir public
+    - cp -r htmlcov/ public/
+  artifacts:
+    paths:
+    - public
+  only:
+  - master
