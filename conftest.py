@@ -1,7 +1,9 @@
 import pytest
 import os
 
-os.unsetenv('CI_PIPELINE_IID')
+
+# If we run on gitlab, we need the tests to pass still...
+del os.environ['CI_PIPELINE_IID']
 
 
 @pytest.fixture()
