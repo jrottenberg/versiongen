@@ -22,21 +22,9 @@ pytest:
 local-run:
   stage: test
   script:
-     - src/run.py -o src/version.json
-     - cat src/version.json
-
-validate:
-  stage: test
-  image: ${IMAGE_REPOSITORY}:${CI_PIPELINE_IID}_master
-  only:
-    - master
-  script:
-     - src/run.py -o src/version.json
-     - cat src/version.json
-  artifacts:
-    paths:
-    - src/version.json
-
+     - mkdir out
+     - versiongen/generate.py -o out/version.json
+     - cat out/version.json
 
 .docker:
   image: docker:latest
