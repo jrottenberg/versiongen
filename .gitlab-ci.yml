@@ -5,7 +5,6 @@ stages:
 - build
 - test
 
-
 flake8:
    stage: lint
    script:
@@ -41,7 +40,13 @@ image-develop:
   variables:
     IMAGE: ${IMAGE_REPOSITORY}:${CI_PIPELINE_IID}_develop
 
-local:
+pytest:
+  stage: test
+  script:
+     - pip install pytest
+     - pytest --cov versiongen
+
+local-run:
   stage: test
   script:
      - src/run.py -o src/version.json
