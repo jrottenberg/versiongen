@@ -1,7 +1,3 @@
 FROM python:3
 
-
-CMD ["/opt/versiongen/generate.py.py"]
-
-
-ADD versiongen /opt/versiongen
+ADD versiongen/generate.py /usr/local/bin/versiongen
