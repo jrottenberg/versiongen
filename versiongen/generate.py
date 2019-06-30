@@ -15,13 +15,13 @@ def gen_gitlab():
     Generate version object when running on gitlab
     """
     version = {}
-    version['buildNumber'] = os.environ['CI_PIPELINE_IID']
-    version['buildTag'] = os.environ['CI_PIPELINE_IID']
+    version['buildNumber'] = os.getenv('CI_PIPELINE_IID')
+    version['buildTag'] = os.getenv('CI_PIPELINE_IID')
     version['buildTime'] = now
-    version['scmBranch'] = os.environ['CI_COMMIT_REF_NAME']
-    version['scmCommit'] = os.environ['CI_COMMIT_SHA']
-    version['scmUrl'] = os.environ['CI_REPOSITORY_URL']
-    version['version'] = os.environ['CI_PIPELINE_IID']
+    version['scmBranch'] = os.getenv('CI_COMMIT_REF_NAME')
+    version['scmCommit'] = os.getenv('CI_COMMIT_SHA')
+    version['scmUrl'] = os.getenv('CI_REPOSITORY_URL')
+    version['version'] = os.getenv('CI_PIPELINE_IID')
     return version
 
 
