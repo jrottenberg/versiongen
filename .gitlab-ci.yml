@@ -2,14 +2,42 @@ image: python:3
 
 stages:
 - lint
-- build
 - test
+- build
+
 
 flake8:
    stage: lint
    script:
      - pip install flake8
      - flake8 src
+
+
+
+pytest:
+  stage: test
+  script:
+     - pip install pytest
+     - pytest --cov versiongen
+
+local-run:
+  stage: test
+  script:
+     - src/run.py -o src/version.json
+     - cat src/version.json
+
+validate:
+  stage: test
+  image: ${IMAGE_REPOSITORY}:${CI_PIPELINE_IID}_master
+  only:
+    - master
+  script:
+     - src/run.py -o src/version.json
+     - cat src/version.json
+  artifacts:
+    paths:
+    - src/version.json
+
 
 .docker:
   image: docker:latest
@@ -39,27 +67,3 @@ image-develop:
     - master
   variables:
     IMAGE: ${IMAGE_REPOSITORY}:${CI_PIPELINE_IID}_develop
-
-pytest:
-  stage: test
-  script:
-     - pip install pytest
-     - pytest --cov versiongen
-
-local-run:
-  stage: test
-  script:
-     - src/run.py -o src/version.json
-     - cat src/version.json
-
-validate:
-  stage: test
-  image: ${IMAGE_REPOSITORY}:${CI_PIPELINE_IID}_master
-  only:
-    - master
-  script:
-     - src/run.py -o src/version.json
-     - cat src/version.json
-  artifacts:
-    paths:
-    - src/version.json
