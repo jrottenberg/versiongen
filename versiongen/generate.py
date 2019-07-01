@@ -16,12 +16,12 @@ def gen_gitlab():
     """
     version = {}
     version['buildNumber'] = os.getenv('CI_PIPELINE_IID')
-    version['buildTag'] = F"gitlab-{os.getenv('CI_PROJECT_DIR')}-{os.getenv('CI_PIPELINE_IID')}"
+    version['buildTag'] = F"gitlab-{os.getenv('CI_PROJECT_PATH_SLUG')}-{os.getenv('CI_PIPELINE_IID')}"
     version['buildTime'] = now
     version['scmBranch'] = os.getenv('CI_BUILD_REF_SLUG')
     version['scmCommit'] = os.getenv('CI_COMMIT_SHA')
     version['scmUrl'] = os.getenv('CI_PROJECT_PATH')
-    version['version'] = F"{os.getenv('CI_PIPELINE_IID')}-{os.getenv('CI_BUILD_REF_SLUG')}"
+    version['version'] = F"{os.getenv('CI_PIPELINE_IID')}_{os.getenv('CI_BUILD_REF_SLUG')}"
     return version
 
 

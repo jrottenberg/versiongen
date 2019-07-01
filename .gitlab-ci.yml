@@ -1,4 +1,4 @@
-image: python:3
+image: python:3-alpine
 
 stages:
 - lint
@@ -26,7 +26,8 @@ local-run:
   script:
      - mkdir out
      - versiongen/generate.py -o out/version.json
-     - cat out/version.json
+     - apk --update add jq
+     - cat out/version.json | jq .
 
 .docker:
   image: docker:latest

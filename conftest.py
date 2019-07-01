@@ -12,7 +12,7 @@ def emulate_gitlab(monkeypatch):
     monkeypatch.setenv('CI_PROJECT_DIR', 'versiongen')
     monkeypatch.setenv('CI_COMMIT_REF_NAME', 'local')
     monkeypatch.setenv('CI_COMMIT_SHA', '01234sha1')
-    monkeypatch.setenv('CI_PROJECT_PATH', 'path/to/myproject')
+    monkeypatch.setenv('CI_PROJECT_PATH_SLUG', 'path-to-myproject')
 
 
 @pytest.fixture()
