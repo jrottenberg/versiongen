@@ -11,7 +11,7 @@ jobs:
       docker build -t ${DOCKER}:${BUILD_BUILDNUMBER} .
     displayName: Build docker image
   - bash: |
-      docker run --rm ${DOCKER}:${BUILD_BUILDNUMBER} versiongen
+      versiongen/generate.py
       cat version.json
     displayName: Test image
   - bash: |
