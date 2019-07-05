@@ -9,11 +9,9 @@ jobs:
 
   steps:
   - bash: |
-      env
-      docker build -t ${DOCKER}:${BUILD_BUILDNUMBER} .
+      env | sort | grep -E 'BUILD_|SYSTEM_'
+      docker build -t ${DOCKER}:${BUILD_BUILDID} .
     displayName: Build docker image
-    env:
-      BUILD_BUILDNUMBER: $(Build.BuildNumber)
   # - bash: |
   #     versiongen/generate.py
   #     cat version.json
@@ -21,9 +19,8 @@ jobs:
   - bash: |
       docker login --username ${DOCKER_LOGIN} --password ${DOCKER_PASSWORD}
       docker info
-      docker push ${DOCKER}:${BUILD_BUILDNUMBER}
+      docker push ${DOCKER}:${BUILD_BUILDID}
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
     displayName: Push docker image
     env:
       DOCKER_PASSWORD: $(docker.password)
-      BUILD_BUILDNUMBER: $(Build.BuildNumber)
