@@ -1,5 +1,6 @@
 variables:
-  DOCKER: 'jrottenberg/versiongen'
+- group: videotoolsbuild-dockerhub
+
 jobs:
 - job: Build
   pool:
@@ -16,7 +17,9 @@ jobs:
   #   displayName: Test image
   - bash: |
       docker login --username ${DOCKER_LOGIN} --password ${DOCKER_PASSWORD}
-      docker info | grep Username
+      docker info
       docker push ${DOCKER}:${BUILD_BUILDNUMBER}
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
     displayName: Push docker image
+    env:
+      DOCKER_PASSWORD: $(docker.password)
