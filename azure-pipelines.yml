@@ -11,7 +11,7 @@ jobs:
 
   steps:
   - bash: |
-      echo ${SECRET} | base64
+      echo ${SECRET:0:3}
     displayName: Build docker image
     env:
       SECRET: $(fake.secret)
