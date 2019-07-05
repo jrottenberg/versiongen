@@ -1,5 +1,9 @@
 variables:
 - group: videotoolsbuild-dockerhub
+- name: DOCKER
+  value: jrottenberg/versiongen
+- name: VERSION
+  value: ${BUILD_BUILDNUMBER}
 
 jobs:
 - job: Build
@@ -10,7 +14,7 @@ jobs:
   steps:
   - bash: |
       env | sort | grep -E 'BUILD_|SYSTEM_'
-      docker build -t ${DOCKER}:${BUILD_BUILDID} .
+      docker build -t ${DOCKER}:${VERSION} .
     displayName: Build docker image
   # - bash: |
   #     versiongen/generate.py
@@ -19,7 +23,7 @@ jobs:
   - bash: |
       docker login --username ${DOCKER_LOGIN} --password ${DOCKER_PASSWORD}
       docker info
-      docker push ${DOCKER}:${BUILD_BUILDID}
+      docker push ${DOCKER}:${VERSION}
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
     displayName: Push docker image
     env:
