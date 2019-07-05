@@ -11,6 +11,8 @@ jobs:
   - bash: |
       docker build -t ${DOCKER}:${BUILD_BUILDNUMBER} .
     displayName: Build docker image
+    env:
+      BUILD_BUILDNUMBER: $(Build.BuildNumber)
   # - bash: |
   #     versiongen/generate.py
   #     cat version.json
@@ -23,3 +25,4 @@ jobs:
     displayName: Push docker image
     env:
       DOCKER_PASSWORD: $(docker.password)
+      BUILD_BUILDNUMBER: $(Build.BuildNumber)
