@@ -10,10 +10,10 @@ jobs:
   - bash: |
       docker build -t ${DOCKER}:${BUILD_BUILDNUMBER} .
     displayName: Build docker image
-  - bash: |
-      versiongen/generate.py
-      cat version.json
-    displayName: Test image
+  # - bash: |
+  #     versiongen/generate.py
+  #     cat version.json
+  #   displayName: Test image
   - bash: |
       docker login --username ${DOCKER_LOGIN} --password ${DOCKER_PASSWORD}
       docker info | grep Username
