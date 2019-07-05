@@ -9,6 +9,7 @@ jobs:
 
   steps:
   - bash: |
+      env
       docker build -t ${DOCKER}:${BUILD_BUILDNUMBER} .
     displayName: Build docker image
     env:
