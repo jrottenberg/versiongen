@@ -1,0 +1,22 @@
+variables:
+  DOCKER: 'jrottenberg/versiongen'
+jobs:
+- job: Build
+  pool:
+    vmImage: 'Ubuntu 16.04'
+
+
+  steps:
+  - bash: |
+      docker build -t ${DOCKER}:${BUILD_BUILDNUMBER} .
+    displayName: Build docker image
+  - bash: |
+      docker run --rm ${DOCKER}:${BUILD_BUILDNUMBER} versiongen
+      cat version.json
+    displayName: Test image
+  - bash: |
+      docker login --username ${DOCKER_LOGIN} --password ${DOCKER_PASSWORD}
+      docker info | grep Username
+      docker push ${DOCKER}:${BUILD_BUILDNUMBER}
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    displayName: Push docker image
