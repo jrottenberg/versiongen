@@ -1,4 +1,7 @@
 # versiongen
+
+[![Build Status](https://dev.azure.com/video-tools/versiongen/_apis/build/status/jrottenberg.versiongen?branchName=master)](https://dev.azure.com/video-tools/versiongen/_build/latest?definitionId=3&branchName=master)
+
 Generate a version file for CI
 
 

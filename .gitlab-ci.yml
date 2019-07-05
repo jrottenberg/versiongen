@@ -62,7 +62,7 @@ pages:
   stage: build
   script:
     - mkdir public
-    - cp -r htmlcov/ public/
+    - cp -r out/ public/
   artifacts:
     paths:
     - public

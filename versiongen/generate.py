@@ -25,6 +25,21 @@ def gen_gitlab():
     return version
 
 
+def gen_azure():
+    """
+    Generate version object when running on azure
+    """
+    version = {}
+    version['buildNumber'] = os.getenv('BUILD_BUILDNUMBER')
+    version['buildTag'] = F"azure-{os.getenv('BUILD_REPOSITORY_NAME')}-{os.getenv('BUILD_BUILDNUMBER')}"
+    version['buildTime'] = now
+    version['scmBranch'] = os.getenv('BUILD_SOURCEBRANCHNAME')
+    version['scmCommit'] = os.getenv('BUILD_SOURCEVERSION')
+    version['scmUrl'] = os.getenv('BUILD_REPOSITORY_URI')
+    version['version'] = F"{os.getenv('BUILD_BUILDNUMBER')}_{os.getenv('BUILD_SOURCEBRANCHNAME')}"
+    return version
+
+
 def determine_ci():
     """
     Guess the running ci system based on environment variables
@@ -35,7 +50,7 @@ def determine_ci():
         return "jenkins"
     if ('TRAVIS_BUILD_ID' in os.environ):
         return "travis"
-    if ('BUILD_BUILDID' in os.environ):
+    if ('BUILD_BUILDNUMBER' in os.environ):
         return "azure"
     if ('CIRCLE_BUILD_NUM' in os.environ):
         return "circle"
@@ -58,7 +73,8 @@ if __name__ == "__main__":
     if current_ci == 'gitlab':
         version = gen_gitlab()
 
-    version = gen_gitlab()
+    if current_ci == 'azure':
+        version = gen_azure()
 
     with open(filename, 'w') as f:
         json.dump(version, f)

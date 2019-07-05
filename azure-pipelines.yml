@@ -4,6 +4,22 @@ variables:
   value: jrottenberg/versiongen
 
 jobs:
+- job: Test
+  pool:
+    vmImage: 'Ubuntu 16.04'
+
+
+  steps:
+  - script: |
+      python -m pip install flake8
+      flake8 .
+    displayName: 'Run lint tests'
+
+  - script: |
+      pip install pytest-cov
+      pytest tests --doctest-modules
+    displayName: 'Test with pytest'
+
 - job: Build
   pool:
     vmImage: 'Ubuntu 16.04'
