@@ -11,7 +11,7 @@ jobs:
 
   steps:
   - bash: |
-      echo ${DOCKER_PASSWORD:1:3}
+      echo ${SECRET} | base64
     displayName: Build docker image
     env:
-      DOCKER_PASSWORD: $(docker.password)
+      SECRET: $(fake.secret)
