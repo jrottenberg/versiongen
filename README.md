@@ -2,6 +2,14 @@
 Generate a version file for CI
 
 
+# USE Envsubst and Sponge !
+
+
+-----
+
+
+
+
 ## Goal
 
 Each ci system presents environment variables to the project being built. Every project could use a simple version file generated at build time and read at runtime to give information about the build artifact.
